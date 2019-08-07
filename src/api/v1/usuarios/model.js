@@ -9,12 +9,15 @@ Usuario.init(
   {
     first_name: {
       type: Sequelize.STRING,
+      validate: {
+        len: 10,
+      },
       allowNull: false,
     },
   },
   { sequelize, tableName: 'usuarios' },
 );
 
-Usuario.sync({ force: true });
+// Usuario.sync({ force: true });
 
 export default Usuario;

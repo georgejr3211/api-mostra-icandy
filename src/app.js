@@ -7,7 +7,6 @@ import routes from './routes';
 class App {
   constructor() {
     this.express = express();
-    this.prefix = '/api';
     this.middlewares();
     this.routes();
   }
@@ -16,12 +15,18 @@ class App {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(cors());
-    this.express.use(morgan('combined'));
+    this.express.use(morgan('common'));
     this.express.use(compression());
   }
 
   routes() {
-    this.express.use(`${this.prefix}/`, routes);
+    this.express.use('/', routes);
+
+    this.express.use('/', (req, res) => {
+      res.json({
+        message: 'API Mostrar de Talentos 2019',
+      });
+    });
   }
 }
 
