@@ -1,0 +1,26 @@
+version: '3'
+services:
+  api:
+    build: .
+    ports:
+      - '4000:4000'
+    command: npm run start:dev
+    volumes:
+      - .:/usr/app
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: icandy
+
+  pgadmin4:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: georgefeitosajr12@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: docker
+    ports:
+      - 5555:80
