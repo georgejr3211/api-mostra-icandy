@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const perfis = sequelize.define('perfis', {
+  const formas_pagamento = sequelize.define('formas_pagamento', {
     descricao: DataTypes.STRING,
     ativo: DataTypes.INTEGER
   }, {
     underscored: true,
   });
-  perfis.associate = function(models) {
+  formas_pagamento.associate = function(models) {
     // associations can be defined here
   };
-  return perfis;
+  return formas_pagamento;
 };

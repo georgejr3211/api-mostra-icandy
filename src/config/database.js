@@ -6,5 +6,10 @@ module.exports = {
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
   dialect: process.env.DB_TYPE,
-  // operatorsAliases: false,
+  define: {
+    freezeTableName: true,
+    underscored: true,
+    underscoredAll: true,
+    paranoid: false,
+  },
 };
