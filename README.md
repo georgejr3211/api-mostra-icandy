@@ -7,3 +7,10 @@
 ❯ docker-compose up -d postgres pgadmin4
 ❯ docker-compose up api
 ❯ npx sequelize-cli db:migrate
+
+# FALTA FAZER - ROTAS
+[] pedidos
+[] restaurantes
+[] produtos
+[] pedidos produtos
+[] formas pagamentos
