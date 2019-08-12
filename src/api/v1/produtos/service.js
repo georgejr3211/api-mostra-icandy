@@ -1,7 +1,11 @@
 import Resource from './model';
+import Categoria from '../categorias/model';
+import Restaurante from '../restaurantes/model';
 
 export async function getAllResources() {
-  const resources = await Resource.findAll();
+  const resources = await Resource.findAll({
+    // include: [Categoria]
+  });
 
   return resources;
 }

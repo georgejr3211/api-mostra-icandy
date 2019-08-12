@@ -9,6 +9,7 @@ PedidoProduto.init(
   {
     pedidos_id: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       references: {
         model: 'pedidos',
         key: 'id',
@@ -16,6 +17,7 @@ PedidoProduto.init(
     },
     produtos_id: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       references: {
         model: 'produtos',
         key: 'id',

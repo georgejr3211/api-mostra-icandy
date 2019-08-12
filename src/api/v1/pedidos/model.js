@@ -9,6 +9,7 @@ Pedido.init(
   {
     formas_pagamento_id: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       references: {
         model: 'formas_pagamentos',
         key: 'id',
@@ -16,6 +17,7 @@ Pedido.init(
     },
     usuarios_id: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       references: {
         model: 'usuarios',
         key: 'id',
@@ -23,6 +25,7 @@ Pedido.init(
     },
     status_pedido_id: {
       type: Sequelize.INTEGER,
+      allowNull: false,
       references: {
         model: 'status_pedidos',
         key: 'id',

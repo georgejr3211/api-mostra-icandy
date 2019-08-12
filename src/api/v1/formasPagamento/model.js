@@ -9,6 +9,7 @@ FormaPagamento.init(
   {
     descricao: {
       type: Sequelize.STRING(50),
+      allowNull: false
     },
     ativo: {
       type: Sequelize.INTEGER,

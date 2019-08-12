@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 import routes from './routes';
+import { errorHandler } from './middlewares/errorHandler';
 
 class App {
   constructor() {
@@ -22,7 +23,7 @@ class App {
   routes() {
     this.express.use('/', routes);
 
-    this.express.use('/', (req, res) => {
+    this.express.use('/', errorHandler, (req, res) => {
       res.json({
         message: 'API Mostrar de Talentos 2019',
       });

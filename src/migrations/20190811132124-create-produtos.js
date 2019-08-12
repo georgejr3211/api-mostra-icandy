@@ -23,6 +23,9 @@ module.exports = {
     nome: {
       type: Sequelize.STRING(100),
     },
+    foto: {
+      type: Sequelize.STRING,
+    },
     descricao: {
       type: Sequelize.STRING(100),
     },
