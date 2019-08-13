@@ -1,5 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 import config from '../../../config/database';
+import Perfil from '../perfis/model';
 
 const sequelize = new Sequelize(config);
 
@@ -40,7 +41,7 @@ Usuario.init(
         model: 'perfis',
         key: 'id',
       },
-      allowNull: false,
+      // allowNull: false,
     },
     ativo: {
       type: Sequelize.INTEGER,
@@ -50,6 +51,6 @@ Usuario.init(
   { sequelize, tableName: 'usuarios' },
 );
 
-// Usuario.sync({ force: true });
+Usuario.Perfil = Usuario.hasOne(Perfil, { foreignKey: 'id', sourceKey: 'perfis_id', as: 'perfil' });
 
 export default Usuario;
