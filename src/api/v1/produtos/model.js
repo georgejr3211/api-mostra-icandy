@@ -11,7 +11,7 @@ Produto.init(
   {
     categorias_id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: 'categorias',
         key: 'id',
@@ -40,7 +40,7 @@ Produto.init(
   { sequelize, tableName: 'produtos' },
 );
 
-// Produto.hasOne(Categoria);
-// Produto.hasOne(Restaurante)
+Produto.Categoria = Produto.belongsTo(Categoria, { foreignKey: 'id', sourceKey: 'categorias_id', as: 'categoria' });
+Produto.Restaurante = Produto.belongsTo(Restaurante, { foreignKey: 'id', sourceKey: 'restaurantes_id', as: 'restaurante' });
 
 export default Produto;

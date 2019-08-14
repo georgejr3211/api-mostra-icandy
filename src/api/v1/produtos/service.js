@@ -1,12 +1,21 @@
 import Resource from './model';
-import Categoria from '../categorias/model';
-import Restaurante from '../restaurantes/model';
 
-export async function getAllResources() {
+export async function getAllResources(offset, limit, search) {
   const resources = await Resource.findAll({
-    // include: [Categoria]
+    attributes: ['id', 'nome'],
+    include: [
+      {
+        association: Resource.Restaurante, required: true, attributes: ['id', 'nome'],
+      },
+      { association: Resource.Categoria, required: true, attributes: ['id', 'nome'] },
+    ],
+    where: {
+      '$restaurante.nome$': `${search}`
+    },
+    offset,
+    limit
   });
-
+  // required: true => inner join, false => left join
   return resources;
 }
 
