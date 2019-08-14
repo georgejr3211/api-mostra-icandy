@@ -4,8 +4,7 @@
 [] - Criar as rotas
 
 # Comandos
-### ❯ sudo docker-compose up -d postgres pgadmin4
-### ❯ sudo docker-compose up api
+### ❯ sudo docker-compose up -d postgres pgadmin4; sudo docker-compose up api
 ### ❯ npx sequelize-cli db:migrate
 
 PG ADMIN
