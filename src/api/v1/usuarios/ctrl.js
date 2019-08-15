@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import bcrypt from 'bcryptjs';
 import * as resourceService from './service';
 
 const router = Router();
@@ -33,6 +34,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
+    req.body.password = bcrypt.hashSync(req.body.password);
     const resource = await resourceService.createResource(req.body);
 
     return res.json({
