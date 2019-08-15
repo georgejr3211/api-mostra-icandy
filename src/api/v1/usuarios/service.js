@@ -3,18 +3,6 @@ import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
   const resources = Resource.findAll({
-    where: {
-      ativo: 1,
-      nome: {
-        [Op.like]: `%${search}%`,
-      },
-      sobrenome: {
-        [Op.like]: `%${search}%`,
-      },
-      username: {
-        [Op.like]: `%${search}%`,
-      },
-    },
     order: [['id', 'DESC']],
     offset,
     limit,
@@ -22,8 +10,29 @@ export async function getAllResources(offset, limit, search) {
       {
         association: Resource.Perfil,
         attributes: ['id', 'descricao'],
+        as: 'perfil',
       },
     ],
+    where: {
+      ativo: 1,
+      [Op.or]: [
+        {
+          '$perfil.descricao$': { [Op.like]: `%${search}%` },
+        },
+        {
+          nome: { [Op.like]: `%${search}%` },
+        },
+        {
+          email: { [Op.like]: `%${search}%` },
+        },
+        {
+          sobrenome: { [Op.like]: `%${search}%` },
+        },
+        {
+          username: { [Op.like]: `%${search}%` },
+        },
+      ],
+    },
   });
 
   return resources;
@@ -43,11 +52,7 @@ export async function getResource(id) {
 }
 
 export function createResource(resource) {
-  return Resource.create(resource, {
-    include: [
-      { association: Resource.Perfil },
-    ],
-  });
+  return Resource.create(resource);
 }
 
 export function updateResource(id, resource) {
