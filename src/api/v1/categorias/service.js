@@ -1,7 +1,19 @@
 import Resource from './model';
 
-export async function getAllResources() {
-  const resources = await Resource.findAll();
+export async function getAllResources(offset, limit, search) {
+  const resources = Resource.findAll({
+    order: [['id', 'DESC']],
+    offset,
+    limit,
+    where: {
+      ativo: 1,
+      [Op.or]: [
+        {
+          nome: { [Op.like]: `%${search}%` },
+        },
+      ],
+    },
+  });
 
   return resources;
 }

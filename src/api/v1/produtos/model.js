@@ -43,6 +43,7 @@ Produto.init(
   },
   { sequelize, tableName: 'produtos' },
 );
+
 Produto.Categoria = Produto.hasOne(Categoria, {
   foreignKey: 'id',
   sourceKey: 'categorias_id',
