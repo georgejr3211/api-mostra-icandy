@@ -16,15 +16,18 @@ module.exports = {
     },
     username: {
       type: Sequelize.STRING(110),
+      unique: true,
     },
     password: {
       type: Sequelize.STRING(150),
     },
     cpf: {
       type: Sequelize.STRING(11),
+      unique: true,
     },
     email: {
       type: Sequelize.STRING(150),
+      unique: true,
     },
     telefone: {
       type: Sequelize.STRING(20),

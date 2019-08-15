@@ -7,6 +7,12 @@ class Pedido extends Model {}
 
 Pedido.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     formas_pagamento_id: {
       type: Sequelize.INTEGER,
       allowNull: false,

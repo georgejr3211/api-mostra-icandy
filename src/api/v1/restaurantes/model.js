@@ -7,6 +7,12 @@ class Restaurante extends Model {}
 
 Restaurante.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     nome: {
       type: Sequelize.STRING(100),
       allowNull: false,

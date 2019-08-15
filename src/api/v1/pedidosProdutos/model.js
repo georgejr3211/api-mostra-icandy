@@ -7,6 +7,12 @@ class PedidoProduto extends Model {}
 
 PedidoProduto.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     pedidos_id: {
       type: Sequelize.INTEGER,
       allowNull: false,

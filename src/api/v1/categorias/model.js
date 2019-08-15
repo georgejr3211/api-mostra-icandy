@@ -7,6 +7,12 @@ class Categoria extends Model {}
 
 Categoria.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     nome: {
       type: Sequelize.STRING(80),
       allowNull: false,
