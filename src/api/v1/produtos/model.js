@@ -43,6 +43,16 @@ Produto.init(
   },
   { sequelize, tableName: 'produtos' },
 );
+Produto.Categoria = Produto.hasOne(Categoria, {
+  foreignKey: 'id',
+  sourceKey: 'categorias_id',
+  as: 'categoria',
+});
+Produto.Restaurante = Produto.hasOne(Restaurante, {
+  foreignKey: 'id',
+  sourceKey: 'restaurantes_id',
+  as: 'restaurante',
+});
 
 // Produto.Categoria = Produto.belongsTo(Categoria, { foreignKey: 'id', sourceKey: 'categorias_id', as: 'categoria' });
 Produto.Restaurante = Produto.belongsTo(Restaurante, { foreignKey: 'id' });

@@ -1,5 +1,8 @@
 import Sequelize, { Model } from 'sequelize';
 import config from '../../../config/database';
+import FormaPagamento from '../formasPagamento/model';
+import Usuario from '../usuarios/model';
+import StatusPedido from '../statusPedidos/model';
 
 const sequelize = new Sequelize(config);
 
@@ -50,5 +53,21 @@ Pedido.init(
   },
   { sequelize, tableName: 'pedidos' },
 );
+
+Pedido.FormaPagamento = Pedido.hasOne(FormaPagamento, {
+  foreignKey: 'id',
+  sourceKey: 'formas_pagamento_id',
+  as: 'formaPagamento',
+});
+Pedido.Usuario = Pedido.hasOne(Usuario, {
+  foreignKey: 'id',
+  sourceKey: 'usuarios_id',
+  as: 'usuario',
+});
+Pedido.StatusPedido = Pedido.hasOne(StatusPedido, {
+  foreignKey: 'id',
+  sourceKey: 'status_pedido_id',
+  as: 'statusPedido',
+});
 
 export default Pedido;
