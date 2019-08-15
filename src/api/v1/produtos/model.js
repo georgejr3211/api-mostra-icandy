@@ -9,9 +9,14 @@ class Produto extends Model {}
 
 Produto.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     categorias_id: {
       type: Sequelize.INTEGER,
-      allowNull: true,
       references: {
         model: 'categorias',
         key: 'id',
@@ -19,7 +24,6 @@ Produto.init(
     },
     restaurantes_id: {
       type: Sequelize.INTEGER,
-      allowNull: false,
       references: {
         model: 'restaurantes',
         key: 'id',
@@ -40,7 +44,7 @@ Produto.init(
   { sequelize, tableName: 'produtos' },
 );
 
-Produto.Categoria = Produto.belongsTo(Categoria, { foreignKey: 'id', sourceKey: 'categorias_id', as: 'categoria' });
-Produto.Restaurante = Produto.belongsTo(Restaurante, { foreignKey: 'id', sourceKey: 'restaurantes_id', as: 'restaurante' });
+// Produto.Categoria = Produto.belongsTo(Categoria, { foreignKey: 'id', sourceKey: 'categorias_id', as: 'categoria' });
+Produto.Restaurante = Produto.belongsTo(Restaurante, { foreignKey: 'id' });
 
 export default Produto;

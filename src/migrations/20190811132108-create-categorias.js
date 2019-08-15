@@ -10,6 +10,7 @@ module.exports = {
     },
     nome: {
       type: Sequelize.STRING(80),
+      unique: true,
     },
     ativo: {
       type: Sequelize.INTEGER,

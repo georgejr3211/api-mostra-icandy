@@ -8,6 +8,12 @@ class Usuario extends Model {}
 
 Usuario.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     nome: {
       type: Sequelize.STRING(70),
       allowNull: false,
@@ -41,7 +47,7 @@ Usuario.init(
         model: 'perfis',
         key: 'id',
       },
-      // allowNull: false,
+      allowNull: true,
     },
     ativo: {
       type: Sequelize.INTEGER,
@@ -51,6 +57,10 @@ Usuario.init(
   { sequelize, tableName: 'usuarios' },
 );
 
-Usuario.Perfil = Usuario.hasOne(Perfil, { foreignKey: 'id', sourceKey: 'perfis_id', as: 'perfil' });
+Usuario.Perfil = Usuario.hasOne(Perfil, {
+  foreignKey: 'id',
+  sourceKey: 'perfis_id',
+  as: 'perfil',
+});
 
 export default Usuario;

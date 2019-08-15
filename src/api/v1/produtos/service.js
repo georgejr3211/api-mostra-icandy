@@ -5,15 +5,21 @@ export async function getAllResources(offset, limit, search) {
     attributes: ['id', 'nome'],
     include: [
       {
-        association: Resource.Restaurante, required: true, attributes: ['id', 'nome'],
+        association: Resource.Restaurante,
+        required: true,
+        attributes: ['id', 'nome'],
       },
-      { association: Resource.Categoria, required: true, attributes: ['id', 'nome'] },
+      // {
+      //   association: Resource.Categoria,
+      //   required: false,
+      //   attributes: ['id', 'nome'],
+      // },
     ],
-    where: {
-      '$restaurante.nome$': `${search}`
-    },
+    // where: {
+    //   '$restaurante.nome$': `${search}`,
+    // },
     offset,
-    limit
+    limit,
   });
   // required: true => inner join, false => left join
   return resources;
@@ -26,7 +32,23 @@ export async function getResource(id) {
 }
 
 export function createResource(resource) {
-  return Resource.create(resource);
+  // Exemplo do insert
+  // {
+  //   "nome": "Brigadeiro",
+  //   "restaurante": {
+  //     "nome": "artesNEW2",
+  //     "cnpj": "8888",
+  //     "telefone": "999"
+  //   },
+  //   "categoria": {
+  //     "nome": "Doces"
+  //   }
+  // }
+  return Resource.create(resource, {
+    include: [
+      { association: 'restaurante', isSingleAssociation: true },
+    ],
+  });
 }
 
 export function updateResource(id, resource) {

@@ -7,6 +7,12 @@ class StatusPedido extends Model {}
 
 StatusPedido.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     descricao: {
       type: Sequelize.STRING(50),
       allowNull: false,

@@ -10,6 +10,7 @@ module.exports = {
     },
     descricao: {
       type: Sequelize.STRING(50),
+      unique: true,
     },
     ativo: {
       type: Sequelize.INTEGER,

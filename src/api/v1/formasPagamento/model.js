@@ -7,9 +7,15 @@ class FormaPagamento extends Model {}
 
 FormaPagamento.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     descricao: {
       type: Sequelize.STRING(50),
-      allowNull: false
+      allowNull: false,
     },
     ativo: {
       type: Sequelize.INTEGER,

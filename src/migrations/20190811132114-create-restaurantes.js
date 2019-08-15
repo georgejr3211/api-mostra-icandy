@@ -13,6 +13,7 @@ module.exports = {
     },
     cnpj: {
       type: Sequelize.STRING(14),
+      unique: true,
     },
     descricao: {
       type: Sequelize.STRING(100),

@@ -1,5 +1,3 @@
-
-
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('perfis', {
     id: {
@@ -10,6 +8,7 @@ module.exports = {
     },
     descricao: {
       type: Sequelize.STRING(30),
+      unique: true,
     },
     ativo: {
       type: Sequelize.INTEGER,

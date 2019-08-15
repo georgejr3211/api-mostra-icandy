@@ -20,8 +20,7 @@ export async function getAllResources(offset, limit, search) {
     limit,
     include: [
       {
-        association: 'perfil',
-        as: 'p',
+        association: Resource.Perfil,
         attributes: ['id', 'descricao'],
       },
     ],
@@ -34,8 +33,7 @@ export async function getResource(id) {
   const resource = await Resource.findByPk(id, {
     include: [
       {
-        association: 'perfil',
-        as: 'p',
+        association: Resource.Perfil,
         attributes: ['id', 'descricao'],
       },
     ],
@@ -46,7 +44,9 @@ export async function getResource(id) {
 
 export function createResource(resource) {
   return Resource.create(resource, {
-    include: ['perfil'],
+    include: [
+      { association: Resource.Perfil },
+    ],
   });
 }
 

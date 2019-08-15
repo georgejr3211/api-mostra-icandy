@@ -7,6 +7,12 @@ class Perfil extends Model {}
 
 Perfil.init(
   {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
     descricao: {
       type: Sequelize.STRING(30),
       allowNull: false,
