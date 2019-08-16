@@ -32,23 +32,7 @@ export async function getResource(id) {
 }
 
 export function createResource(resource) {
-  // Exemplo do insert
-  // {
-  //   "nome": "Brigadeiro",
-  //   "restaurante": {
-  //     "nome": "artesNEW2",
-  //     "cnpj": "8888",
-  //     "telefone": "999"
-  //   },
-  //   "categoria": {
-  //     "nome": "Doces"
-  //   }
-  // }
-  return Resource.create(resource, {
-    include: [
-      { association: 'restaurante', isSingleAssociation: true },
-    ],
-  });
+  return Resource.create(resource);
 }
 
 export function updateResource(id, resource) {

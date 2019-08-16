@@ -35,8 +35,8 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     req.body.password = bcrypt.hashSync(req.body.password);
-    const resource = await resourceService.createResource(req.body);
-
+    let resource = await resourceService.createResource(req.body);
+    resource = await resourceService.getResource(resource.id);
     return res.json({
       value: resource,
     });
@@ -48,7 +48,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-
+    req.body.password = bcrypt.hashSync(req.body.password);
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
 
