@@ -19,10 +19,10 @@ router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const resources = await resourceService.getResource(id);
+    const resource = await resourceService.getResource(id);
 
     return res.json({
-      value: resources,
+      value: resource,
     });
   } catch (error) {
     return next(error);
@@ -31,7 +31,8 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const resource = await resourceService.createResource(req.body);
+    let resource = await resourceService.createResource(req.body);
+    resource = await resourceService.getResource(resource.id);
 
     return res.json({
       value: resource,

@@ -21,6 +21,7 @@ Produto.init(
         model: 'categorias',
         key: 'id',
       },
+      allowNull: null,
     },
     restaurantes_id: {
       type: Sequelize.INTEGER,
@@ -28,6 +29,7 @@ Produto.init(
         model: 'restaurantes',
         key: 'id',
       },
+      allowNull: false,
     },
     nome: {
       type: Sequelize.STRING(100),
@@ -35,6 +37,9 @@ Produto.init(
     },
     descricao: {
       type: Sequelize.STRING(100),
+    },
+    foto: {
+      type: Sequelize.STRING,
     },
     ativo: {
       type: Sequelize.INTEGER,
