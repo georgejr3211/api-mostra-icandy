@@ -1,3 +1,4 @@
+import { Op } from 'sequelize';
 import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
