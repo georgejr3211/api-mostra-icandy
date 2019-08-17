@@ -6,8 +6,8 @@ const router = Router();
 router.get('/', async (req, res, next) => {
   try {
     const { offset = 0, limit = 10, s = '' } = req.query;
-
     const resources = await resourceService.getAllResources(offset, limit, s);
+
     return res.json({
       value: resources,
     });

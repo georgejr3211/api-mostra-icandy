@@ -5,7 +5,7 @@
 
 # Comandos
 ### ❯ sudo docker-compose up -d postgres pgadmin4; sudo docker-compose up api
-### ❯ npx sequelize-cli db:migrate
+### ❯ sudo npx sequelize-cli db:migrate
 
 PG ADMIN
 http://localhost:5555
