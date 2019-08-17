@@ -1,7 +1,26 @@
+import { Op } from 'sequelize';
 import Resource from './model';
 
-export async function getAllResources() {
-  const resources = await Resource.findAll();
+export async function getAllResources(offset, limit, s) {
+  const resources = await Resource.findAndCountAll({
+    include: [{ all: true }],
+    where: {
+      [Op.or]: [
+        { '$usuario.nome$': { [Op.like]: `%${s}%` } },
+        { '$formaPagamento.descricao$': { [Op.like]: `%${s}%` } },
+        { '$statusPedido.descricao$': { [Op.like]: `%${s}%` } },
+        { '$usuario.nome$': { [Op.like]: `%${s}%` } },
+        { '$usuario.email$': { [Op.like]: `%${s}%` } },
+        { '$usuario.sobrenome$': { [Op.like]: `%${s}%` } },
+        { '$usuario.username$': { [Op.like]: `%${s}%` } },
+      ],
+    },
+    order: [
+      ['id', 'DESC'],
+    ],
+    offset,
+    limit,
+  });
 
   return resources;
 }
