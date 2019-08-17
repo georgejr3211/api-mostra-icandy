@@ -1,45 +1,25 @@
 import { Op } from 'sequelize';
 import Resource from './model';
 
-export async function getAllResources(offset, limit, search) {
-  const resources = Resource.findAll({
-    order: [['id', 'DESC']],
-    offset,
-    limit,
-    include: [
-      {
-        association: Resource.FormaPagamento,
-        attributes: ['id', 'descricao'],
-        as: 'formaPagamento',
-      },
-      {
-        association: Resource.Usuario,
-        attributes: ['id', 'nome', 'sobrenome', 'username'],
-        as: 'usuario',
-      },
-      {
-        association: Resource.StatusPedido,
-        attributes: ['id', 'descricao'],
-        as: 'statusPedido',
-      },
-    ],
+export async function getAllResources(offset, limit, s) {
+  const resources = await Resource.findAndCountAll({
+    include: [{ all: true }],
     where: {
-      ativo: 1,
       [Op.or]: [
-        {
-          '$formaPagamento.descricao$': { [Op.like]: `%${search}%` },
-        },
-        {
-          '$usuario.nome$': { [Op.like]: `%${search}%` },
-        },
-        {
-          '$statusPedido.descricao$': { [Op.like]: `%${search}%` },
-        },
-        {
-          observacao: { [Op.like]: `%${search}%` },
-        },
+        { '$usuario.nome$': { [Op.like]: `%${s}%` } },
+        { '$formaPagamento.descricao$': { [Op.like]: `%${s}%` } },
+        { '$statusPedido.descricao$': { [Op.like]: `%${s}%` } },
+        { '$usuario.nome$': { [Op.like]: `%${s}%` } },
+        { '$usuario.email$': { [Op.like]: `%${s}%` } },
+        { '$usuario.sobrenome$': { [Op.like]: `%${s}%` } },
+        { '$usuario.username$': { [Op.like]: `%${s}%` } },
       ],
     },
+    order: [
+      ['id', 'DESC'],
+    ],
+    offset,
+    limit,
   });
 
   return resources;

@@ -59,15 +59,17 @@ Pedido.FormaPagamento = Pedido.hasOne(FormaPagamento, {
   sourceKey: 'formas_pagamento_id',
   as: 'formaPagamento',
 });
-Pedido.Usuario = Pedido.hasOne(Usuario, {
-  foreignKey: 'id',
-  sourceKey: 'usuarios_id',
-  as: 'usuario',
-});
+
 Pedido.StatusPedido = Pedido.hasOne(StatusPedido, {
   foreignKey: 'id',
   sourceKey: 'status_pedido_id',
   as: 'statusPedido',
+});
+
+Pedido.Usuario = Pedido.belongsTo(Usuario, {
+  foreignKey: 'usuarios_id',
+  targetKey: 'id',
+  as: 'usuario',
 });
 
 export default Pedido;
