@@ -1,5 +1,7 @@
 import Sequelize, { Model } from 'sequelize';
 import config from '../../../config/database';
+import Pedido from '../pedidos/model';
+import Produto from '../produtos/model';
 
 const sequelize = new Sequelize(config);
 
@@ -39,5 +41,16 @@ PedidoProduto.init(
   },
   { sequelize, tableName: 'pedidos_produtos' },
 );
+
+PedidoProduto.Pedido = PedidoProduto.hasOne(Pedido, {
+  foreignKey: 'id',
+  sourceKey: 'pedidos_id',
+  as: 'pedido',
+});
+PedidoProduto.Produto = PedidoProduto.hasOne(Produto, {
+  foreignKey: 'id',
+  sourceKey: 'produtos_id',
+  as: 'produto',
+});
 
 export default PedidoProduto;
