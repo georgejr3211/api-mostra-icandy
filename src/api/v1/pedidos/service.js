@@ -15,9 +15,7 @@ export async function getAllResources(offset, limit, s) {
         { '$usuario.username$': { [Op.like]: `%${s}%` } },
       ],
     },
-    order: [
-      ['id', 'DESC'],
-    ],
+    order: [['id', 'DESC']],
     offset,
     limit,
   });
