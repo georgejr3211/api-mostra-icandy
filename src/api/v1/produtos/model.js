@@ -60,7 +60,8 @@ Produto.Restaurante = Produto.hasOne(Restaurante, {
   as: 'restaurante',
 });
 
-// Produto.Categoria = Produto.belongsTo(Categoria, { foreignKey: 'id', sourceKey: 'categorias_id', as: 'categoria' });
-Produto.Restaurante = Produto.belongsTo(Restaurante, { foreignKey: 'id' });
+// Produto.Categoria = Produto.belongsTo(Categoria, {
+//  foreignKey: 'id', sourceKey: 'categorias_id', as: 'categoria' });
+// Produto.Restaurante = Produto.belongsTo(Restaurante, { foreignKey: 'id' });
 
 export default Produto;

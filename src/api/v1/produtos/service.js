@@ -1,27 +1,23 @@
+import { Op } from 'sequelize';
 import Resource from './model';
 
-export async function getAllResources(offset, limit, search) {
-  const resources = await Resource.findAll({
-    attributes: ['id', 'nome'],
-    include: [
-      {
-        association: Resource.Restaurante,
-        required: true,
-        attributes: ['id', 'nome'],
-      },
-      // {
-      //   association: Resource.Categoria,
-      //   required: false,
-      //   attributes: ['id', 'nome'],
-      // },
-    ],
-    // where: {
-    //   '$restaurante.nome$': `${search}`,
-    // },
+export async function getAllResources(offset, limit, s) {
+  const resources = await Resource.findAndCountAll({
+    include: [{ all: true }],
+    where: {
+      [Op.or]: [
+        { '$categoria.nome$': { [Op.like]: `%${s}%` } },
+        { '$restaurante.nome$': { [Op.like]: `%${s}%` } },
+        { '$restaurante.cnpj$': { [Op.like]: `%${s}%` } },
+        { '$restaurante.descricao$': { [Op.like]: `%${s}%` } },
+        { '$restaurante.telefone$': { [Op.like]: `%${s}%` } },
+      ],
+    },
+    order: [['id', 'DESC']],
     offset,
     limit,
   });
-  // required: true => inner join, false => left join
+
   return resources;
 }
 

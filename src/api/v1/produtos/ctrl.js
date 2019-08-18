@@ -45,6 +45,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', upload.single('foto_produto'), async (req, res, next) => {
   try {
+    console.log('req body =>', req.body);
     req.body.foto = `${req.file.filename}`;
     let resource = await resourceService.createResource(req.body);
     resource = await resourceService.getResource(resource.id);
