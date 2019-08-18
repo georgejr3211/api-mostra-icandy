@@ -37,10 +37,12 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const cpf = validateBr.cpf(req.body.cpf);
+
     if (cpf) {
       req.body.password = bcrypt.hashSync(req.body.password);
       let resource = await resourceService.createResource(req.body);
       resource = await resourceService.getResource(resource.id);
+
       return res.json({
         value: resource,
       });
@@ -54,15 +56,20 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    req.body.password = bcrypt.hashSync(req.body.password);
-    let resource = await resourceService.updateResource(id, req.body);
-    resource = await resourceService.getResource(id);
+    const cpf = validateBr.cpf(req.body.cpf);
 
-    return res.json({
-      value: resource,
-    });
+    if (cpf) {
+      req.body.password = bcrypt.hashSync(req.body.password);
+      let resource = await resourceService.updateResource(id, req.body);
+      resource = await resourceService.getResource(id);
+
+      return res.json({
+        value: resource,
+      });
+    }
+    throw new Error('CPF INVÁLIDO!');
   } catch (error) {
-    return next(error);
+    return next(error.message);
   }
 });
 
