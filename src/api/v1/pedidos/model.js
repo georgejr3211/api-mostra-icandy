@@ -23,6 +23,9 @@ Pedido.init(
         model: 'formas_pagamentos',
         key: 'id',
       },
+      validate: {
+        isInt: true,
+      },
     },
     usuarios_id: {
       type: Sequelize.INTEGER,
@@ -30,6 +33,9 @@ Pedido.init(
       references: {
         model: 'usuarios',
         key: 'id',
+      },
+      validate: {
+        isInt: true,
       },
     },
     status_pedido_id: {
@@ -39,16 +45,25 @@ Pedido.init(
         model: 'status_pedidos',
         key: 'id',
       },
+      validate: {
+        isInt: true,
+      },
     },
     observacao: {
       type: Sequelize.STRING,
     },
     troco: {
       type: Sequelize.DECIMAL,
+      validate: {
+        isDecimal: true,
+      },
     },
     ativo: {
       type: Sequelize.INTEGER,
       defaultValue: 1,
+      validate: {
+        isInt: true,
+      },
     },
   },
   { sequelize, tableName: 'pedidos' },
