@@ -6,9 +6,9 @@ export async function getAllResources(offset, limit, s) {
     include: [{ all: true }],
     where: {
       [Op.or]: [
-        { '$pedido.formas_pagamento_id$': { [Op.like]: `%${s}%` } },
-        { '$pedido.usuarios_id$': { [Op.like]: `%${s}%` } },
-        { '$pedido.status_pedido_id$': { [Op.like]: `%${s}%` } },
+        // { '$pedido.formas_pagamento_id$': { [Op.like]: `%${s}%` } },
+        // { '$pedido.usuarios_id$': { [Op.like]: `%${s}%` } },
+        // { '$pedido.status_pedido_id$': { [Op.like]: `%${s}%` } },
         { '$pedido.observacao$': { [Op.like]: `%${s}%` } },
         { '$pedido.troco$': { [Op.like]: `%${s}%` } },
         { '$produto.nome$': { [Op.like]: `%${s}%` } },
