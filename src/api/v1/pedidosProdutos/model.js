@@ -47,6 +47,7 @@ PedidoProduto.Pedido = PedidoProduto.hasOne(Pedido, {
   sourceKey: 'pedidos_id',
   as: 'pedido',
 });
+
 PedidoProduto.Produto = PedidoProduto.hasOne(Produto, {
   foreignKey: 'id',
   sourceKey: 'produtos_id',
