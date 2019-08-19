@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validateBr } from 'js-brasil';
 import * as resourceService from './service';
 
 const router = Router();
@@ -31,14 +32,19 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let resource = await resourceService.createResource(req.body);
-    resource = await resourceService.getResource(resource.id);
+    const cnpj = validateBr.cnpj(req.body.cnpj);
 
-    return res.json({
-      value: resource,
-    });
+    if (cnpj) {
+      let resource = await resourceService.createResource(req.body);
+      resource = await resourceService.getResource(resource.id);
+
+      return res.json({
+        value: resource,
+      });
+    }
+    throw new Error('CNPJ INVÁLIDO!');
   } catch (error) {
-    return next(error);
+    return next(error.message);
   }
 });
 
