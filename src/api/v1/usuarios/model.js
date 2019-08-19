@@ -16,15 +16,15 @@ Usuario.init(
     },
     nome: {
       type: Sequelize.STRING(70),
-      allowNull: false,
+      allowNull: true,
     },
     sobrenome: {
       type: Sequelize.STRING(70),
-      allowNull: false,
+      allowNull: true,
     },
     username: {
       type: Sequelize.STRING(70),
-      allowNull: false,
+      allowNull: true,
     },
     password: {
       type: Sequelize.STRING(150),
@@ -32,11 +32,14 @@ Usuario.init(
     },
     cpf: {
       type: Sequelize.STRING(11),
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: Sequelize.STRING(150),
       allowNull: false,
+      validate: {
+        isEmail: true,
+      },
     },
     telefone: {
       type: Sequelize.STRING(20),
@@ -47,6 +50,7 @@ Usuario.init(
         model: 'perfis',
         key: 'id',
       },
+      defaultValue: 1,
       allowNull: true,
     },
     ativo: {

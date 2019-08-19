@@ -3,7 +3,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 import routes from './routes';
-import { errorHandler } from './middlewares/errorHandler';
+import errorHandler from './middlewares/errorHandler';
+import auth from './api/auth/ctrl';
+import tokenValidator from './middlewares/tokenValidator';
 
 class App {
   constructor() {
@@ -21,8 +23,8 @@ class App {
   }
 
   routes() {
-    this.express.use('/', routes);
-
+    this.express.use('/auth', auth);
+    this.express.use('/', tokenValidator, routes);
     this.express.use('/', errorHandler, (req, res) => {
       res.json({
         message: 'API Mostrar de Talentos 2019',

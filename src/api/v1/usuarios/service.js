@@ -1,4 +1,6 @@
 import { Op } from 'sequelize';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
@@ -61,4 +63,25 @@ export function updateResource(id, resource) {
 
 export function deleteResource(id) {
   return Resource.findByPk(id).then(res => res.destroy());
+}
+
+export async function authenticate(email, password) {
+  const user = await Resource.findOne({
+    where: {
+      email,
+    },
+  });
+
+  if (!user) {
+    throw new Error('Usuário não encontrado');
+  } else {
+    const hash = user.get('password');
+    const compare = bcrypt.compareSync(password, hash);
+    const payload = { ...user.toJSON() };
+
+    // token
+    return compare
+      ? jwt.sign(payload, process.env.TOKEN_SECRET_KEY, { expiresIn: '6h' })
+      : null;
+  }
 }
