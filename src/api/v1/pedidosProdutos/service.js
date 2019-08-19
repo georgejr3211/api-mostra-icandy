@@ -2,7 +2,7 @@ import { Op } from 'sequelize';
 import Resource from './model';
 
 export async function getAllResources(offset, limit, s) {
-  const resources = await Resource.findAndCountAll({
+  const resources = await Resource.findAll({
     include: [{ all: true }],
     where: {
       [Op.or]: [
