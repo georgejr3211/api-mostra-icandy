@@ -3,7 +3,6 @@ import bcrypt from 'bcryptjs';
 import { validateBr } from 'js-brasil';
 import * as resourceService from './service';
 
-
 const router = Router();
 
 router.get('/', async (req, res, next) => {
@@ -15,6 +14,14 @@ router.get('/', async (req, res, next) => {
     return res.json({
       value: resources,
     });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.get('/logged-user', async (req, res, next) => {
+  try {
+    return res.json(req.user);
   } catch (error) {
     return next(error);
   }

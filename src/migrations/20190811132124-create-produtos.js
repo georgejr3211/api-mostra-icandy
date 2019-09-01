@@ -29,6 +29,10 @@ module.exports = {
     descricao: {
       type: Sequelize.STRING(100),
     },
+    preco: {
+      type: Sequelize.DECIMAL(10, 2),
+      allowNull: false,
+    },
     ativo: {
       type: Sequelize.INTEGER,
       defaultValue: 1,
