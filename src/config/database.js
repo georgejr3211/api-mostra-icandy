@@ -5,6 +5,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
+  logging: false,
   dialect: process.env.DB_TYPE,
   define: {
     freezeTableName: true,

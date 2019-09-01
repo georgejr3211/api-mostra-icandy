@@ -38,6 +38,10 @@ Produto.init(
     descricao: {
       type: Sequelize.STRING(100),
     },
+    preco: {
+      type: Sequelize.DECIMAL(10, 2),
+      allowNull: false,
+    },
     foto: {
       type: Sequelize.STRING,
     },

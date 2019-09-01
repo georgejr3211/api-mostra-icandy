@@ -2,22 +2,7 @@ import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
   const resources = await Resource.findAll({
-    attributes: ['id', 'nome'],
-    include: [
-      {
-        association: Resource.Restaurante,
-        required: true,
-        attributes: ['id', 'nome'],
-      },
-      // {
-      //   association: Resource.Categoria,
-      //   required: false,
-      //   attributes: ['id', 'nome'],
-      // },
-    ],
-    // where: {
-    //   '$restaurante.nome$': `${search}`,
-    // },
+    include: [{ all: true }],
     offset,
     limit,
   });
