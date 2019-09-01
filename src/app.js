@@ -20,6 +20,7 @@ class App {
     this.express.use(cors());
     this.express.use(morgan('common'));
     this.express.use(compression());
+    this.express.use(express.static('public'));
   }
 
   routes() {
