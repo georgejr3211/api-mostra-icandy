@@ -1,7 +1,9 @@
 import Resource from './model';
 
 export async function getAllResources() {
-  const resources = await Resource.findAll();
+  const resources = await Resource.findAll({
+    include: [{ all: true }],
+  });
 
   return resources;
 }

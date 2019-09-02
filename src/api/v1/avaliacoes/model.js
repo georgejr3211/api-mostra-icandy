@@ -6,7 +6,7 @@ const sequelize = new Sequelize(config);
 
 class Avaliacao extends Model {}
 
-Restaurante.init(
+Avaliacao.init(
   {
     id: {
       allowNull: false,
@@ -30,11 +30,11 @@ Restaurante.init(
       defaultValue: null,
     },
   },
-  { sequelize, tableName: 'restaurantes' },
+  { sequelize, tableName: 'avaliacoes_restaurantes' },
 );
-Avaliacao.Restaurante = Avaliacao.belongsTo(Restaurante, {
-  foreignKey: 'restaurantes_id',
-  targetKey: 'id',
+Avaliacao.Restaurante = Avaliacao.hasOne(Restaurante, {
+  foreignKey: 'id',
+  sourceKey: 'restaurante_id',
   as: 'restaurante',
 });
 

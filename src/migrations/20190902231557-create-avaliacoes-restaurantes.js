@@ -1,30 +1,31 @@
-'use strict';
+
+
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('avaliacoes_restaurantes', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+  up: (queryInterface, Sequelize) => queryInterface.createTable('avaliacoes_restaurantes', {
+    id: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+    },
+    restaurante_id: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'restaurantes',
+        key: 'id',
       },
-      restaurante_id: {
-        type: Sequelize.INTEGER
-      },
-      avaliacao: {
-        type: Sequelize.INTEGER
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('avaliacoes_restaurantes');
-  }
+    },
+    avaliacao: {
+      type: Sequelize.INTEGER,
+    },
+    created_at: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+    updated_at: {
+      allowNull: false,
+      type: Sequelize.DATE,
+    },
+  }),
+  down: (queryInterface, Sequelize) => queryInterface.dropTable('avaliacoes_restaurantes'),
 };
