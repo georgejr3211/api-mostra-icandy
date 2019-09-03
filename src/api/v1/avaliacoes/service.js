@@ -1,8 +1,11 @@
+import { fn, col } from 'sequelize';
 import Resource from './model';
 
 export async function getAllResources() {
-  const resources = await Resource.findAll({
-    include: [{ all: true }],
+  const resources = await Resource.findOne({
+    // include: [{ all: true }],
+    attributes: [[fn('avg', col('avaliacao')), 'avgAvaliacao']],
+    raw: true,
   });
 
   return resources;

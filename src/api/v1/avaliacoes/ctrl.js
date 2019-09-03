@@ -32,17 +32,12 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const cnpj = validateBr.cnpj(req.body.cnpj);
+    let resource = await resourceService.createResource(req.body);
+    resource = await resourceService.getResource(resource.id);
 
-    if (cnpj) {
-      let resource = await resourceService.createResource(req.body);
-      resource = await resourceService.getResource(resource.id);
-
-      return res.json({
-        value: resource,
-      });
-    }
-    throw new Error('CNPJ INVÁLIDO!');
+    return res.json({
+      value: resource,
+    });
   } catch (error) {
     return next(error.message);
   }
