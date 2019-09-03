@@ -9,6 +9,7 @@ import FormasPagamentoController from '../../api/v1/formasPagamento/ctrl';
 import PedidosProdutosController from '../../api/v1/pedidosProdutos/ctrl';
 import ProdutosController from '../../api/v1/produtos/ctrl';
 import PedidosController from '../../api/v1/pedidos/ctrl';
+import AvaliacoesController from '../../api/v1/avaliacoes/ctrl';
 
 const router = Router();
 
@@ -21,5 +22,6 @@ router.use('/formas-pagamento', FormasPagamentoController);
 router.use('/pedidos-produtos', PedidosProdutosController);
 router.use('/produtos', ProdutosController);
 router.use('/pedidos', PedidosController);
+router.use('/avaliacoes', AvaliacoesController);
 
 export default router;
