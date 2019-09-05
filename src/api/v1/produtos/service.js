@@ -5,6 +5,7 @@ export async function getAllResources(offset, limit, search) {
     include: [{ all: true }],
     offset,
     limit,
+    order: [['id', 'DESC']],
   });
   // required: true => inner join, false => left join
   return resources;
