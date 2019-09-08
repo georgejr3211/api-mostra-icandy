@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import * as resourceService from './service';
+import * as pedidoProdutoService from '../pedidosProdutos/service';
 
 const router = Router();
 
@@ -35,8 +36,27 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    let resource = await resourceService.createResource(req.body);
+    // falta inserir a localizacao
+    const payload = {
+      formas_pagamento_id: req.body.formas_pagamento_id,
+      usuarios_id: req.user.id,
+      status_pedido_id: 1,
+      observacao: req.body.observacao,
+      troco: req.body.troco.replace(',', '.'),
+    };
+
+    let resource = await resourceService.createResource(payload);
     resource = await resourceService.getResource(resource.id);
+
+    req.body.itens.map(async (item) => {
+      const payloadPedidoProduto = {
+        pedidos_id: resource.id,
+        produtos_id: item.id,
+        quantidade: item.qtd,
+      };
+
+      await pedidoProdutoService.createResource(payloadPedidoProduto);
+    });
 
     return res.json({
       value: resource,
