@@ -24,7 +24,21 @@ router.get('/:id', async (req, res, next) => {
     const resource = await resourceService.getResource(id);
 
     // resource = resource.map(r => r.dataValue);
-    console.log('resource', resource);
+    // console.log('resource', resource);
+
+    return res.json({
+      value: resource,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.get('/user/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const resource = await resourceService.getResourceUser(id);
 
     return res.json({
       value: resource,
