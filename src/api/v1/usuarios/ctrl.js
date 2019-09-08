@@ -62,6 +62,7 @@ router.post('/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
+    console.log('update');
     const { id } = req.params;
 
     req.body.password = bcrypt.hashSync(req.body.password);
