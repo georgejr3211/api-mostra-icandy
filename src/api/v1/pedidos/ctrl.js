@@ -51,12 +51,13 @@ router.get('/user/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     // falta inserir a localizacao
+    req.body.troco = req.body.troco ? req.body.troco.replace(',', '.') : 0;
     const payload = {
       formas_pagamento_id: req.body.formas_pagamento_id,
       usuarios_id: req.user.id,
       status_pedido_id: 1,
       observacao: req.body.observacao,
-      troco: req.body.troco.replace(',', '.'),
+      troco: req.body.troco,
     };
 
     let resource = await resourceService.createResource(payload);

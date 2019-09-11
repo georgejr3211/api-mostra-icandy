@@ -54,9 +54,6 @@ Pedido.init(
     },
     troco: {
       type: Sequelize.DECIMAL,
-      validate: {
-        isDecimal: true,
-      },
     },
     ativo: {
       type: Sequelize.INTEGER,
