@@ -1,14 +1,12 @@
 import { Router } from 'express';
-import bcrypt from 'bcryptjs';
-import { validateBr } from 'js-brasil';
 import * as resourceService from './service';
+
 
 const router = Router();
 
 router.get('/', async (req, res, next) => {
   try {
     const { offset = 0, limit = 10, s = '' } = req.query;
-
     const resources = await resourceService.getAllResources(offset, limit, s);
 
     return res.json({
@@ -19,22 +17,14 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/logged-user', async (req, res, next) => {
-  try {
-    return res.json(req.user);
-  } catch (error) {
-    return next(error);
-  }
-});
-
 router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const resources = await resourceService.getResource(id);
+    const resource = await resourceService.getResource(id);
 
     return res.json({
-      value: resources,
+      value: resource,
     });
   } catch (error) {
     return next(error);
@@ -43,20 +33,15 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const cpf = validateBr.cpf(req.body.cpf);
+    let resource = await resourceService.createResource(req.body);
 
-    if (cpf) {
-      req.body.password = bcrypt.hashSync(req.body.password);
-      let resource = await resourceService.createResource(req.body);
-      resource = await resourceService.getResource(resource.id);
+    resource = await resourceService.getResource(resource.id);
 
-      return res.json({
-        value: resource,
-      });
-    }
-    throw new Error('CPF INVÁLIDO!');
+    return res.json({
+      value: resource,
+    });
   } catch (error) {
-    return next(error.message);
+    return next(error);
   }
 });
 
@@ -64,7 +49,6 @@ router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    req.body.password = bcrypt.hashSync(req.body.password);
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
 

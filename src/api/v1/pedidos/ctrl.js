@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as resourceService from './service';
 import * as pedidoProdutoService from '../pedidosProdutos/service';
+import * as localizacoesPedidosService from '../localizacoesPedidos/service';
 
 const router = Router();
 
@@ -71,6 +72,11 @@ router.post('/', async (req, res, next) => {
       };
 
       await pedidoProdutoService.createResource(payloadPedidoProduto);
+    });
+
+    await localizacoesPedidosService.createResource({
+      pedido_id: resource.id,
+      local_id: req.body.localEntrega,
     });
 
     return res.json({
