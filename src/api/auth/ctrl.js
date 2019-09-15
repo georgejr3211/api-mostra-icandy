@@ -23,6 +23,20 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.post('/email', async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    const resource = await resourceService.getResourceEmail(email);
+
+    return res.json({
+      value: resource,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 router.post('/forgot', async (req, res, next) => {
   try {
     const { email } = req.body;
