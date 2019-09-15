@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import nodemailer from 'nodemailer';
 import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
@@ -38,6 +39,38 @@ export async function getAllResources(offset, limit, search) {
   });
 
   return resources;
+}
+
+export async function sendEmail(email, novaSenha) {
+  const transporter = nodemailer.createTransport({
+    service: 'gmail', // smtp.gmail.com  //in place of service use host...
+    secure: false, // true
+    port: 25, // 465
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+
+
+  const HelperOptions = {
+    from: '"ICandy" <georgefeitosajr12@gmail.com',
+    to: email,
+    subject: 'Nova senha',
+    text: `Aqui está sua nova senha ${novaSenha}`,
+  };
+
+
+  transporter.sendMail(HelperOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log('The message was sent!');
+    console.log(info);
+  });
 }
 
 export async function getResource(id) {

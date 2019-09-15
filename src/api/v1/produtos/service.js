@@ -1,3 +1,4 @@
+import Sequelize from 'sequelize';
 import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
@@ -5,9 +6,13 @@ export async function getAllResources(offset, limit, search) {
     include: [{ all: true }],
     offset,
     limit,
+    where: {
+      nome: {
+        [Sequelize.Op.iLike]: `%${search}%`,
+      },
+    },
     order: [['id', 'DESC']],
   });
-  // required: true => inner join, false => left join
   return resources;
 }
 
