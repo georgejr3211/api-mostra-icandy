@@ -86,6 +86,26 @@ export async function getResource(id) {
   return resource;
 }
 
+export async function getResourceEmail(email) {
+  const resource = await Resource.findOne({
+    order: [['id', 'DESC']],
+    include: [
+      {
+        association: Resource.Perfil,
+        attributes: ['id', 'descricao'],
+      },
+    ],
+    where: {
+      ativo: 1,
+      email: {
+        [Op.iLike]: `${email}`,
+      },
+    },
+  });
+
+  return resource;
+}
+
 export function createResource(resource) {
   return Resource.create(resource);
 }
