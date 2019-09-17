@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
+import { validateBr } from 'js-brasil';
 import * as resourceService from '../v1/usuarios/service';
 import Usuario from '../v1/usuarios/model';
 
@@ -23,6 +24,25 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.post('/register', async (req, res, next) => {
+  try {
+    const cpf = validateBr.cpf(req.body.cpf);
+
+    if (cpf) {
+      req.body.password = bcrypt.hashSync(req.body.password);
+      let resource = await resourceService.createResource(req.body);
+      resource = await resourceService.getResource(resource.id);
+
+      return res.json({
+        value: resource,
+      });
+    }
+    throw new Error('CPF INVÁLIDO!');
+  } catch (error) {
+    return next(error.message);
+  }
+});
+
 router.post('/email', async (req, res, next) => {
   try {
     const { email } = req.body;
@@ -43,9 +63,12 @@ router.post('/forgot', async (req, res, next) => {
     const user = await Usuario.findOne({ where: { email } });
     const newPassword = 'aqwe3rij';
 
-    await Usuario.update({
-      password: bcrypt.hashSync(newPassword),
-    }, { where: { id: user.get('id') } });
+    await Usuario.update(
+      {
+        password: bcrypt.hashSync(newPassword),
+      },
+      { where: { id: user.get('id') } },
+    );
     await resourceService.sendEmail(email, newPassword);
 
     return res.json(req.body);

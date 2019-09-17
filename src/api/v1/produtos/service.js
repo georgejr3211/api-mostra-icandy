@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+import { Op } from 'sequelize';
 import Resource from './model';
 
 export async function getAllResources(offset, limit, search) {
@@ -8,7 +8,7 @@ export async function getAllResources(offset, limit, search) {
     limit,
     where: {
       nome: {
-        [Sequelize.Op.iLike]: `%${search}%`,
+        [Op.like]: `%${search}%`,
       },
     },
     order: [['id', 'DESC']],

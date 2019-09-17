@@ -40,7 +40,7 @@
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "newUntitledFile",
   "editor.tabSize": 2,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
   "extensions.ignoreRecommendations": false,
   "emmet.syntaxProfiles": {
     "javascript": "jsx",
