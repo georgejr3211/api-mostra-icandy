@@ -98,7 +98,7 @@ export async function getResourceEmail(email) {
     where: {
       ativo: 1,
       email: {
-        [Op.iLike]: `${email}`,
+        [Op.like]: `${email}`,
       },
     },
   });
