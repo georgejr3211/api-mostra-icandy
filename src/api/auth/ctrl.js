@@ -61,7 +61,7 @@ router.post('/forgot', async (req, res, next) => {
   try {
     const { email } = req.body;
     const user = await Usuario.findOne({ where: { email } });
-    const newPassword = 'aqwe3rij';
+    const newPassword = '123456';
 
     await Usuario.update(
       {
