@@ -19,7 +19,7 @@ router.get('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const resource = await resourceService.getResource(id);
+    const resource = await resourceService.getResourceByPedido(id);
 
     return res.json({
       value: resource,
@@ -28,6 +28,22 @@ router.get('/:id', async (req, res, next) => {
     return next(error);
   }
 });
+
+// router.get('pedido/:id', async (req, res, next) => {
+//   try {
+//     const { id } = req.params;
+//     console.log('params', id);
+
+//     const resource = await resourceService.getResourceByPedido(id);
+//     console.log('resource', resource);
+
+//     return res.json({
+//       value: resource,
+//     });
+//   } catch (error) {
+//     return next(error);
+//   }
+// });
 
 router.post('/', async (req, res, next) => {
   try {
