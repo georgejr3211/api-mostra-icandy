@@ -35,6 +35,7 @@ export async function getResourceUser(id) {
     where: {
       usuarios_id: id,
     },
+    order: [['id', 'DESC']],
   });
 
   return resource;
