@@ -3,7 +3,7 @@ import App from './app';
 const server = require('http').createServer(App);
 const io = require('socket.io')(server);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const HOST = '0.0.0.0';
 
 io.on('connection', (socket) => {
