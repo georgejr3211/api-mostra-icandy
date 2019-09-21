@@ -1,10 +1,12 @@
 {
   "name": "mostra-talentos",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/server.js",
   "license": "MIT",
   "scripts": {
-    "start:dev": "nodemon --exec babel-node src/server.js"
+    "start:dev": "nodemon --exec babel-node src/server.js",
+    "start:build": "mkdir dist && babel src -s -d dist",
+    "start": "node dist/server.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
