@@ -24,7 +24,9 @@ export async function getAllResources(offset, limit, s) {
 }
 
 export async function getResource(id) {
-  const resource = await Resource.findByPk(id);
+  const resource = await Resource.findByPk(id, {
+    include: [{ all: true }],
+  });
 
   return resource;
 }
