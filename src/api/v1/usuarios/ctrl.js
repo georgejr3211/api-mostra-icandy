@@ -63,6 +63,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log(req.body);
 
     let resource = await resourceService.getResource(id);
     if (req.body.password) {

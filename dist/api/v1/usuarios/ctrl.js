@@ -76,6 +76,7 @@ router.put('/:id', async (req, res, next) => {
     const {
       id
     } = req.params;
+    console.log(req.body);
     let resource = await resourceService.getResource(id);
 
     if (req.body.password) {

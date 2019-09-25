@@ -37,7 +37,6 @@ router.get('/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-    console.log('PERFIL', req.body);
     let resource = await resourceService.createResource(req.body);
     resource = await resourceService.getResource(resource.id);
     return res.json({
@@ -52,7 +51,6 @@ router.put('/:id', async (req, res, next) => {
     const {
       id
     } = req.params;
-    console.log(req.body);
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
     return res.json({
