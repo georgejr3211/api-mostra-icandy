@@ -59,9 +59,13 @@ async function getResourceByPedido(id) {
   const resource = await _model.default.findAll({
     order: [['id', 'DESC']],
     include: [{
-      association: _model.default.Produto,
-      attributes: ['id', 'nome', 'preco']
+      all: true
     }],
+    // include: [
+    //   {
+    //     association: Resource.Produto,
+    //     attributes: ['id', 'nome', 'preco'],
+    //   },
     where: {
       ativo: 1,
       pedidos_id: id

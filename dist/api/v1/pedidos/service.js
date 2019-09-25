@@ -60,7 +60,12 @@ async function getAllResources(offset, limit, s) {
 }
 
 async function getResource(id) {
-  const resource = await _model.default.findByPk(id);
+  console.log('GET RESOURCE PEDIDOS');
+  const resource = await _model.default.findByPk(id, {
+    include: [{
+      all: true
+    }]
+  });
   return resource;
 }
 
