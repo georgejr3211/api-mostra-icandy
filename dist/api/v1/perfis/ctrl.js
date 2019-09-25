@@ -37,6 +37,7 @@ router.get('/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
+    console.log('PERFIL', req.body);
     let resource = await resourceService.createResource(req.body);
     resource = await resourceService.getResource(resource.id);
     return res.json({
