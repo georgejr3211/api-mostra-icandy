@@ -51,6 +51,7 @@ router.put('/:id', async (req, res, next) => {
     const {
       id
     } = req.params;
+    console.log(req.body);
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
     return res.json({
