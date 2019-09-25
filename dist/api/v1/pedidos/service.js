@@ -50,7 +50,8 @@ async function getAllResources(offset, limit, s) {
         '$usuario.username$': {
           [_sequelize.Op.like]: `%${s}%`
         }
-      }]
+      }],
+      ativo: 1
     },
     order: [['id', 'DESC']],
     offset,
@@ -60,7 +61,6 @@ async function getAllResources(offset, limit, s) {
 }
 
 async function getResource(id) {
-  console.log('GET RESOURCE PEDIDOS');
   const resource = await _model.default.findByPk(id, {
     include: [{
       all: true

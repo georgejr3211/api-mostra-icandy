@@ -14,6 +14,7 @@ export async function getAllResources(offset, limit, s) {
         { '$usuario.sobrenome$': { [Op.like]: `%${s}%` } },
         { '$usuario.username$': { [Op.like]: `%${s}%` } },
       ],
+      ativo: 1,
     },
     order: [['id', 'DESC']],
     offset,
@@ -24,7 +25,6 @@ export async function getAllResources(offset, limit, s) {
 }
 
 export async function getResource(id) {
-  console.log('GET RESOURCE PEDIDOS');
   const resource = await Resource.findByPk(id, {
     include: [{ all: true }],
   });

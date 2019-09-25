@@ -37,7 +37,6 @@ router.get('/:id', async (req, res, next) => {
       id
     } = req.params;
     const resource = await resourceService.getResource(id);
-    console.log('RESOURCE DATA', resource);
     return res.json({
       value: resource
     });
