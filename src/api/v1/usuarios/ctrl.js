@@ -77,6 +77,7 @@ router.put('/:id', upload.single('foto_usuario'), async (req, res, next) => {
     const { id } = req.params;
     console.log('req.file', req.file);
     console.log('req.files', req.files);
+    console.log('USUARIO PUT', req.body);
 
     let resource = await resourceService.getResource(id);
     if (req.body.password) {
