@@ -19,9 +19,13 @@ class App {
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(
       cors({
-        origin: '*',
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        preflightContinue: false,
+        origin: [
+          'capacitor://localhost',
+          'ionic://localhost',
+          'http://localhost',
+          'http://localhost:8080',
+          'http://localhost:8100',
+        ],
       }),
     );
     this.express.use(morgan('common'));

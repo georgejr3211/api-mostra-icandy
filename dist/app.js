@@ -36,9 +36,7 @@ class App {
       extended: true
     }));
     this.express.use((0, _cors.default)({
-      origin: '*',
-      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      preflightContinue: false
+      origin: ['capacitor://localhost', 'ionic://localhost', 'http://localhost', 'http://localhost:8080', 'http://localhost:8100']
     }));
     this.express.use((0, _morgan.default)('common'));
     this.express.use((0, _compression.default)());
