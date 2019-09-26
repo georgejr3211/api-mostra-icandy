@@ -17,17 +17,7 @@ class App {
   middlewares() {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
-    this.express.use(
-      cors({
-        origin: [
-          'capacitor://localhost',
-          'ionic://localhost',
-          'http://localhost',
-          'http://localhost:8080',
-          'http://localhost:8100',
-        ],
-      }),
-    );
+    this.express.use(cors());
     this.express.use(morgan('common'));
     this.express.use(compression());
     this.express.use(express.static('public'));

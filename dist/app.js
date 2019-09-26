@@ -35,9 +35,7 @@ class App {
     this.express.use(_express.default.urlencoded({
       extended: true
     }));
-    this.express.use((0, _cors.default)({
-      origin: ['capacitor://localhost', 'ionic://localhost', 'http://localhost', 'http://localhost:8080', 'http://localhost:8100']
-    }));
+    this.express.use((0, _cors.default)());
     this.express.use((0, _morgan.default)('common'));
     this.express.use((0, _compression.default)());
     this.express.use(_express.default.static('public'));
