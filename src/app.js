@@ -19,7 +19,7 @@ class App {
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(
       cors({
-        allowedHeaders: ['sessionId', 'Content-Type'],
+        allowedHeaders: ['sessionId', 'Content-Type', 'x-access-token'],
         exposedHeaders: ['sessionId'],
         origin: '*',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
