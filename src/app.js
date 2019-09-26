@@ -17,7 +17,15 @@ class App {
   middlewares() {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
-    this.express.use(cors());
+    this.express.use(
+      cors({
+        allowedHeaders: ['sessionId', 'Content-Type'],
+        exposedHeaders: ['sessionId'],
+        origin: '*',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        preflightContinue: false,
+      }),
+    );
     this.express.use(morgan('common'));
     this.express.use(compression());
     this.express.use(express.static('public'));
