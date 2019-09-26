@@ -36,8 +36,6 @@ class App {
       extended: true
     }));
     this.express.use((0, _cors.default)({
-      allowedHeaders: ['sessionId', 'Content-Type', 'x-access-token'],
-      exposedHeaders: ['sessionId'],
       origin: '*',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       preflightContinue: false
