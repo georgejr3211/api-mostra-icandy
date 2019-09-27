@@ -14,6 +14,14 @@ Usuario.init(
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
+    device_id: {
+      allowNull: true,
+      type: Sequelize.INTEGER,
+    },
+    foto: {
+      type: Sequelize.STRING(160),
+      allowNull: true,
+    },
     nome: {
       type: Sequelize.STRING(70),
       allowNull: true,
