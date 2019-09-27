@@ -51,7 +51,8 @@ router.get('/', async (req, res, next) => {
 });
 router.get('/logged-user', async (req, res, next) => {
   try {
-    return res.json(req.user);
+    const resources = await resourceService.getResource(req.user.id);
+    return res.json(resources);
   } catch (error) {
     return next(error);
   }
@@ -92,9 +93,11 @@ router.put('/:id', upload.single('foto_usuario'), async (req, res, next) => {
     const {
       id
     } = req.params;
-    console.log('req.file', req.file);
-    console.log('req.files', req.files);
-    console.log('USUARIO PUT', req.body);
+
+    if (req.file) {
+      req.body.foto = `${req.file.filename}`;
+    }
+
     let resource = await resourceService.getResource(id);
 
     if (req.body.password) {

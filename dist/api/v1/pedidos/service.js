@@ -51,7 +51,8 @@ async function getAllResources(offset, limit, s) {
           [_sequelize.Op.like]: `%${s}%`
         }
       }],
-      ativo: 1
+      ativo: 1,
+      '$usuario.ativo$': 1
     },
     order: [['id', 'DESC']],
     offset,
