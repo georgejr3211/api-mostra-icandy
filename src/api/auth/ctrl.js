@@ -26,18 +26,13 @@ router.post('/', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   try {
-    const cpf = validateBr.cpf(req.body.cpf);
+    req.body.password = bcrypt.hashSync(req.body.password);
+    let resource = await resourceService.createResource(req.body);
+    resource = await resourceService.getResource(resource.id);
 
-    if (cpf) {
-      req.body.password = bcrypt.hashSync(req.body.password);
-      let resource = await resourceService.createResource(req.body);
-      resource = await resourceService.getResource(resource.id);
-
-      return res.json({
-        value: resource,
-      });
-    }
-    throw new Error('CPF INVÁLIDO!');
+    return res.json({
+      value: resource,
+    });
   } catch (error) {
     return next(error.message);
   }
