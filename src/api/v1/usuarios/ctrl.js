@@ -57,7 +57,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     // const cpf = validateBr.cpf(req.body.cpf);
-
+    console.log(req.body);
     // if (cpf) {
     req.body.password = bcrypt.hashSync(req.body.password);
     let resource = await resourceService.createResource(req.body);
