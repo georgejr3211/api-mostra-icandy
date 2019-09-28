@@ -25,7 +25,7 @@ router.post('/', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   try {
-    console.log(req.body);
+    console.log('req body', req.body);
     req.body.password = bcrypt.hashSync(req.body.password);
     let resource = await resourceService.createResource(req.body);
     resource = await resourceService.getResource(resource.id);
