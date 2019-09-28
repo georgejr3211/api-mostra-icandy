@@ -49,6 +49,16 @@ router.get('/', async (req, res, next) => {
     return next(error);
   }
 });
+router.get('/admins', async (req, res, next) => {
+  try {
+    const resources = await resourceService.getAllAdminDevices();
+    return res.json({
+      value: resources
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
 router.get('/logged-user', async (req, res, next) => {
   try {
     const resources = await resourceService.getResource(req.user.id);

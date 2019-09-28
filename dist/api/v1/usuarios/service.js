@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.getAllAdminDevices = getAllAdminDevices;
 exports.getAllResources = getAllResources;
 exports.sendEmail = sendEmail;
 exports.getResource = getResource;
@@ -23,6 +24,16 @@ var _nodemailer = _interopRequireDefault(require("nodemailer"));
 var _model = _interopRequireDefault(require("./model"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+async function getAllAdminDevices() {
+  const adminDevices = _model.default.findAll({
+    where: {
+      perfis_id: 2
+    }
+  });
+
+  return adminDevices;
+}
 
 async function getAllResources(offset, limit, search) {
   const resources = _model.default.findAll({
