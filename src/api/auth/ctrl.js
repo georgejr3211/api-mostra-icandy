@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
-import { validateBr } from 'js-brasil';
 import * as resourceService from '../v1/usuarios/service';
 import Usuario from '../v1/usuarios/model';
 
@@ -26,6 +25,7 @@ router.post('/', async (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   try {
+    console.log(req.body);
     req.body.password = bcrypt.hashSync(req.body.password);
     let resource = await resourceService.createResource(req.body);
     resource = await resourceService.getResource(resource.id);
