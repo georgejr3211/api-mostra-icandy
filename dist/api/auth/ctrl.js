@@ -9,8 +9,6 @@ var _express = require("express");
 
 var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
-var _jsBrasil = require("js-brasil");
-
 var resourceService = _interopRequireWildcard(require("../v1/usuarios/service"));
 
 var _model = _interopRequireDefault(require("../v1/usuarios/model"));
@@ -39,18 +37,13 @@ router.post('/', async (req, res, next) => {
 });
 router.post('/register', async (req, res, next) => {
   try {
-    const cpf = _jsBrasil.validateBr.cpf(req.body.cpf);
-
-    if (cpf) {
-      req.body.password = _bcryptjs.default.hashSync(req.body.password);
-      let resource = await resourceService.createResource(req.body);
-      resource = await resourceService.getResource(resource.id);
-      return res.json({
-        value: resource
-      });
-    }
-
-    throw new Error('CPF INVÁLIDO!');
+    console.log('req body', req.body);
+    req.body.password = _bcryptjs.default.hashSync(req.body.password);
+    let resource = await resourceService.createResource(req.body);
+    resource = await resourceService.getResource(resource.id);
+    return res.json({
+      value: resource
+    });
   } catch (error) {
     return next(error.message);
   }
