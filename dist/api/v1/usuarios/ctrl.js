@@ -72,18 +72,15 @@ router.get('/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-    const cpf = _jsBrasil.validateBr.cpf(req.body.cpf);
-
-    if (cpf) {
-      req.body.password = _bcryptjs.default.hashSync(req.body.password);
-      let resource = await resourceService.createResource(req.body);
-      resource = await resourceService.getResource(resource.id);
-      return res.json({
-        value: resource
-      });
-    }
-
-    throw new Error('CPF INVÁLIDO!');
+    // const cpf = validateBr.cpf(req.body.cpf);
+    // if (cpf) {
+    req.body.password = _bcryptjs.default.hashSync(req.body.password);
+    let resource = await resourceService.createResource(req.body);
+    resource = await resourceService.getResource(resource.id);
+    return res.json({
+      value: resource
+    }); // }
+    // throw new Error('CPF INVÁLIDO!');
   } catch (error) {
     return next(error.message);
   }

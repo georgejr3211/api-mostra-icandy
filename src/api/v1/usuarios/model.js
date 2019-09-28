@@ -24,7 +24,7 @@ Usuario.init(
     },
     nome: {
       type: Sequelize.STRING(70),
-      allowNull: true,
+      allowNull: false,
     },
     sobrenome: {
       type: Sequelize.STRING(70),
