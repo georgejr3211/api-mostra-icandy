@@ -25,7 +25,8 @@ async function getAllResources(offset, limit, search) {
     where: {
       nome: {
         [_sequelize.Op.like]: `%${search}%`
-      }
+      },
+      ativo: 1
     },
     order: [['id', 'DESC']]
   });
