@@ -75,6 +75,7 @@ router.put('/:id', upload.single('foto_produto'), async (req, res, next) => {
     const {
       id
     } = req.params;
+    req.body.foto = `${req.file.filename}`;
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
     return res.json({
