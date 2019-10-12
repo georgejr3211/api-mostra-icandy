@@ -8,6 +8,14 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
+    device_id: {
+      allowNull: true,
+      type: Sequelize.STRING(200),
+    },
+    foto: {
+      type: Sequelize.STRING(160),
+      allowNull: true,
+    },
     nome: {
       type: Sequelize.STRING(40),
     },

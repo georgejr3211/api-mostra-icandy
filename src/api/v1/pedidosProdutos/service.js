@@ -32,12 +32,12 @@ export async function getResource(id) {
 export async function getResourceByPedido(id) {
   const resource = await Resource.findAll({
     order: [['id', 'DESC']],
-    include: [
-      {
-        association: Resource.Produto,
-        attributes: ['id', 'nome', 'preco'],
-      },
-    ],
+    include: [{ all: true }],
+    // include: [
+    //   {
+    //     association: Resource.Produto,
+    //     attributes: ['id', 'nome', 'preco'],
+    //   },
     where: {
       ativo: 1,
       pedidos_id: id,

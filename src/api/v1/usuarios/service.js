@@ -4,6 +4,16 @@ import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import Resource from './model';
 
+export async function getAllAdminDevices() {
+  const adminDevices = Resource.findAll({
+    where: {
+      perfis_id: 2,
+    },
+  });
+
+  return adminDevices;
+}
+
 export async function getAllResources(offset, limit, search) {
   const resources = Resource.findAll({
     order: [['id', 'DESC']],
