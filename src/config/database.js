@@ -8,6 +8,9 @@ module.exports = {
   port: process.env.DB_PORT,
   logging: false,
   dialect: process.env.DB_TYPE,
+  dialectOptions: {
+    ssl: true,
+  },
   define: {
     freezeTableName: true,
     underscored: true,
