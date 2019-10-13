@@ -57,10 +57,10 @@ router.post('/', upload.single('foto_produto'), async (req, res, next) => {
   }
 });
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', upload.single('foto_produto'), async (req, res, next) => {
   try {
     const { id } = req.params;
-
+    req.body.foto = `${req.file.filename}`;
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
 
