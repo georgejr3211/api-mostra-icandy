@@ -10,6 +10,7 @@ export async function getAllResources(offset, limit, search) {
       nome: {
         [Op.like]: `%${search}%`,
       },
+      ativo: 1,
     },
     order: [['id', 'DESC']],
   });

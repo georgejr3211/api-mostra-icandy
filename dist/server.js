@@ -15,5 +15,5 @@ io.on('connection', socket => {
     socket.broadcast.emit(status);
   });
 });
-server.listen(PORT, HOST, () => console.log('Server listening on port ATUALIZADA', PORT));
+server.listen(PORT, HOST, () => console.log('Server listening on port', PORT));
 //# sourceMappingURL=server.js.map
