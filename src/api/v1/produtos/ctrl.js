@@ -45,7 +45,9 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', upload.single('foto_produto'), async (req, res, next) => {
   try {
-    req.body.foto = `${req.file.filename}`;
+    if (req.file) {
+      req.body.foto = `${req.file.filename}`;
+    }
     let resource = await resourceService.createResource(req.body);
     resource = await resourceService.getResource(resource.id);
 
@@ -60,7 +62,9 @@ router.post('/', upload.single('foto_produto'), async (req, res, next) => {
 router.put('/:id', upload.single('foto_produto'), async (req, res, next) => {
   try {
     const { id } = req.params;
-    req.body.foto = `${req.file.filename}`;
+    if (req.file) {
+      req.body.foto = `${req.file.filename}`;
+    }
     let resource = await resourceService.updateResource(id, req.body);
     resource = await resourceService.getResource(id);
 
