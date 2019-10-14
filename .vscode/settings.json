@@ -2,7 +2,7 @@
   // Define o tema do VSCode
   "workbench.colorTheme": "Dracula",
   "editor.lineHeight": 24,
-  "editor.fontFamily": "Fira Code",
+  // "editor.fontFamily": "Fira Code",
   "editor.fontLigatures": true,
 
   // Aplica linhas verticais para lembrar de quebrar linha em códigos muito grandes
