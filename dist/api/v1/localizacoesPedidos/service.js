@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAllResources = getAllResources;
 exports.getResource = getResource;
+exports.getLocalizacaoPedido = getLocalizacaoPedido;
 exports.createResource = createResource;
 exports.updateResource = updateResource;
 exports.deleteResource = deleteResource;
@@ -30,6 +31,15 @@ async function getResource(id) {
     include: [{
       all: true
     }]
+  });
+  return resource;
+}
+
+async function getLocalizacaoPedido(id) {
+  const resource = await _model.default.findOne({
+    where: {
+      pedido_id: id
+    }
   });
   return resource;
 }

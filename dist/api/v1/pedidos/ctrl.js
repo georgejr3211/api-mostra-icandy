@@ -59,7 +59,8 @@ router.get('/user/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-    // falta inserir a localizacao
+    console.log(req.body);
+    console.log(req.body.longitude);
     req.body.troco = req.body.troco ? req.body.troco.replace(',', '.') : 0;
     const payload = {
       formas_pagamento_id: req.body.formas_pagamento_id,
@@ -80,10 +81,11 @@ router.post('/', async (req, res, next) => {
     });
     await localizacoesPedidosService.createResource({
       pedido_id: resource.id,
-      local_id: req.body.localEntrega
+      longitude: req.body.longitude,
+      latitude: req.body.latitude
     });
     return res.json({
-      value: resource
+      value: 'resource'
     });
   } catch (error) {
     return next(error);

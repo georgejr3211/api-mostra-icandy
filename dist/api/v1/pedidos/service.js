@@ -14,10 +14,12 @@ var _sequelize = require("sequelize");
 
 var _model = _interopRequireDefault(require("./model"));
 
+var _model2 = _interopRequireDefault(require("../statusPedidos/model"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 async function getAllResources(offset, limit, s) {
-  const resources = await _model.default.findAndCountAll({
+  let resources = await _model.default.findAndCountAll({
     include: [{
       all: true
     }],
@@ -58,6 +60,18 @@ async function getAllResources(offset, limit, s) {
     offset,
     limit
   });
+  const status = await _model.default.findAll({
+    include: [{
+      model: _model2.default,
+      as: 'statusPedido',
+      attributes: ['descricao']
+    }],
+    attributes: ['status_pedido_id', [_sequelize.Sequelize.fn('count', _sequelize.Sequelize.col('status_pedido_id')), 'qtd']],
+    group: ['status_pedido_id']
+  });
+  resources = { ...resources,
+    status
+  };
   return resources;
 }
 

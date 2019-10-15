@@ -15,12 +15,11 @@ module.exports = {
         key: 'id'
       }
     },
-    local_id: {
-      type: Sequelize.INTEGER,
-      references: {
-        model: 'localizacoes',
-        key: 'id'
-      }
+    longitude: {
+      type: Sequelize.STRING
+    },
+    latitude: {
+      type: Sequelize.STRING
     },
     ativo: {
       type: Sequelize.INTEGER,

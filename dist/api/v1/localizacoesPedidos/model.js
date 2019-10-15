@@ -31,12 +31,11 @@ LocalizacaoPedido.init({
       key: 'id'
     }
   },
-  local_id: {
-    type: _sequelize.default.INTEGER,
-    references: {
-      model: 'localizacoes',
-      key: 'id'
-    }
+  longitude: {
+    type: _sequelize.default.INTEGER
+  },
+  latitude: {
+    type: _sequelize.default.INTEGER
   },
   ativo: {
     type: _sequelize.default.INTEGER,

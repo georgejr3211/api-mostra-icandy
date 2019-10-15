@@ -29,6 +29,8 @@ var _ctrl10 = _interopRequireDefault(require("../../api/v1/avaliacoes/ctrl"));
 
 var _ctrl11 = _interopRequireDefault(require("../../api/v1/localizacoes/ctrl"));
 
+var _ctrl12 = _interopRequireDefault(require("../../api/v1/localizacoesPedidos/ctrl"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const router = (0, _express.Router)();
@@ -43,6 +45,7 @@ router.use('/produtos', _ctrl8.default);
 router.use('/pedidos', _ctrl9.default);
 router.use('/avaliacoes', _ctrl10.default);
 router.use('/localizacoes', _ctrl11.default);
+router.use('/localizacoes-pedidos', _ctrl12.default);
 var _default = router;
 exports.default = _default;
 //# sourceMappingURL=index.js.map
