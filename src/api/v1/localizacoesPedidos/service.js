@@ -19,6 +19,16 @@ export async function getResource(id) {
   return resource;
 }
 
+export async function getLocalizacaoPedido(id) {
+  const resource = await Resource.findOne({
+    where: {
+      pedido_id: id,
+    },
+  });
+
+  return resource;
+}
+
 export function createResource(resource) {
   return Resource.create(resource);
 }

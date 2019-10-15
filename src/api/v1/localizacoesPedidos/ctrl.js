@@ -31,6 +31,21 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+
+router.get('/pedido/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const resource = await resourceService.getLocalizacaoPedido(id);
+
+    return res.json({
+      value: resource,
+    });
+  } catch (error) {
+    return next(error);
+  }
+});
+
 router.post('/', async (req, res, next) => {
   try {
     let resource = await resourceService.createResource(req.body);

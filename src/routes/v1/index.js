@@ -1,5 +1,3 @@
-
-
 import { Router } from 'express';
 
 import usuariosController from '../../api/v1/usuarios/ctrl';
@@ -13,6 +11,7 @@ import ProdutosController from '../../api/v1/produtos/ctrl';
 import PedidosController from '../../api/v1/pedidos/ctrl';
 import AvaliacoesController from '../../api/v1/avaliacoes/ctrl';
 import LocalizacaoController from '../../api/v1/localizacoes/ctrl';
+import LocalizacaoPedidoController from '../../api/v1/localizacoesPedidos/ctrl';
 
 const router = Router();
 
@@ -27,5 +26,6 @@ router.use('/produtos', ProdutosController);
 router.use('/pedidos', PedidosController);
 router.use('/avaliacoes', AvaliacoesController);
 router.use('/localizacoes', LocalizacaoController);
+router.use('/localizacoes-pedidos', LocalizacaoPedidoController);
 
 export default router;
