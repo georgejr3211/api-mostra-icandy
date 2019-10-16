@@ -64,7 +64,7 @@ async function getAllResources(offset, limit, s) {
     include: [{
       model: _model2.default,
       as: 'statusPedido',
-      attributes: ['descricao']
+      attributes: ['id', 'descricao']
     }],
     attributes: [[_sequelize.Sequelize.fn('count', _sequelize.Sequelize.col('status_pedido_id')), 'qtd']],
     group: ['statusPedido.id']
