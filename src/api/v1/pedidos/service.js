@@ -28,7 +28,7 @@ export async function getAllResources(offset, limit, s) {
       {
         model: StatusPedido,
         as: 'statusPedido',
-        attributes: ['status_pedido_id', 'descricao'],
+        attributes: ['descricao'],
       },
     ],
     attributes: [
