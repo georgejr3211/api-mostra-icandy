@@ -29,8 +29,8 @@ export async function getAllResources(offset, limit, s) {
       as: 'statusPedido',
       attributes: ['descricao'],
     }],
-    attributes: ['status_pedido_id', [Sequelize.fn('count', Sequelize.col('status_pedido_id')), 'qtd']],
-    group: ['status_pedido_id'],
+    attributes: [[Sequelize.fn('count', Sequelize.col('status_pedido_id')), 'qtd']],
+    group: ['statusPedido.id'],
   });
 
   resources = { ...resources, status };
