@@ -3,7 +3,7 @@ import Resource from './model';
 import StatusPedido from '../statusPedidos/model';
 
 export async function getAllResources(offset, limit, s) {
-  let resources = await Resource.findAndCountAll({
+  const resources = await Resource.findAndCountAll({
     include: [{ all: true }],
     where: {
       [Op.or]: [
