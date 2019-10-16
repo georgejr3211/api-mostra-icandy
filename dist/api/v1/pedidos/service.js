@@ -19,7 +19,7 @@ var _model2 = _interopRequireDefault(require("../statusPedidos/model"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 async function getAllResources(offset, limit, s) {
-  const resources = await _model.default.findAndCountAll({
+  let resources = await _model.default.findAndCountAll({
     include: [{
       all: true
     }],
