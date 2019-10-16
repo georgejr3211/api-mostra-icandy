@@ -19,7 +19,7 @@ var _model2 = _interopRequireDefault(require("../statusPedidos/model"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 async function getAllResources(offset, limit, s) {
-  let resources = await _model.default.findAndCountAll({
+  const resources = await _model.default.findAndCountAll({
     include: [{
       all: true
     }],
@@ -59,19 +59,17 @@ async function getAllResources(offset, limit, s) {
     order: [['id', 'DESC']],
     offset,
     limit
-  });
-  const status = await _model.default.findAll({
-    include: [{
-      model: _model2.default,
-      as: 'statusPedido',
-      attributes: ['descricao']
-    }],
-    attributes: ['status_pedido_id', [_sequelize.Sequelize.fn('count', _sequelize.Sequelize.col('status_pedido_id')), 'qtd']],
-    group: ['status_pedido_id']
-  });
-  resources = { ...resources,
-    status
-  };
+  }); // const status = await Resource.findAll({
+  //   include: [{
+  //     model: StatusPedido,
+  //     as: 'statusPedido',
+  //     attributes: ['descricao'],
+  //   }],
+  //   attributes: ['status_pedido_id', [Sequelize.fn('count', Sequelize.col('status_pedido_id')), 'qtd']],
+  //   group: ['status_pedido_id'],
+  // });
+  // resources = { ...resources, status };
+
   return resources;
 }
 
