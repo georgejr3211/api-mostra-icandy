@@ -85,7 +85,7 @@ router.post('/', async (req, res, next) => {
       latitude: req.body.latitude
     });
     return res.json({
-      value: 'resource'
+      value: resource
     });
   } catch (error) {
     return next(error);

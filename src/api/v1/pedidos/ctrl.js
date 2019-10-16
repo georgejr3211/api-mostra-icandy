@@ -79,7 +79,7 @@ router.post('/', async (req, res, next) => {
     });
 
     return res.json({
-      value: 'resource',
+      value: resource,
     });
   } catch (error) {
     return next(error);
