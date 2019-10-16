@@ -3,7 +3,7 @@ import Resource from './model';
 import StatusPedido from '../statusPedidos/model';
 
 export async function getAllResources(offset, limit, s) {
-  let resources = await Resource.findAndCountAll({
+  const resources = await Resource.findAndCountAll({
     include: [{ all: true }],
     where: {
       [Op.or]: [
@@ -23,20 +23,17 @@ export async function getAllResources(offset, limit, s) {
     limit,
   });
 
-  const status = await Resource.findAll({
-    // include: [{
-    //   model: StatusPedido,
-    //   as: 'statusPedido',
-    //   attributes: ['descricao'],
-    // }],
-    attributes: [
-      'status_pedido_id',
-      [Sequelize.fn('count', Sequelize.col('status_pedido_id')), 'qtd'],
-    ],
-    group: ['status_pedido_id'],
-  });
+  // const status = await Resource.findAll({
+  //   include: [{
+  //     model: StatusPedido,
+  //     as: 'statusPedido',
+  //     attributes: ['descricao'],
+  //   }],
+  //   attributes: ['status_pedido_id', [Sequelize.fn('count', Sequelize.col('status_pedido_id')), 'qtd']],
+  //   group: ['status_pedido_id'],
+  // });
 
-  resources = { ...resources, status };
+  // resources = { ...resources, status };
 
   return resources;
 }
