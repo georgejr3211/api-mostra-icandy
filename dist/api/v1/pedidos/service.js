@@ -59,17 +59,19 @@ async function getAllResources(offset, limit, s) {
     order: [['id', 'DESC']],
     offset,
     limit
-  }); // const status = await Resource.findAll({
-  //   include: [{
-  //     model: StatusPedido,
-  //     as: 'statusPedido',
-  //     attributes: ['descricao'],
-  //   }],
-  //   attributes: ['status_pedido_id', [Sequelize.fn('count', Sequelize.col('status_pedido_id')), 'qtd']],
-  //   group: ['status_pedido_id'],
-  // });
-  // resources = { ...resources, status };
-
+  });
+  const status = await _model.default.findAll({
+    include: [{
+      model: _model2.default,
+      as: 'statusPedido',
+      attributes: ['descricao']
+    }],
+    attributes: [[_sequelize.Sequelize.fn('count', _sequelize.Sequelize.col('status_pedido_id')), 'qtd']],
+    group: ['statusPedido.id']
+  });
+  resources = { ...resources,
+    status
+  };
   return resources;
 }
 
