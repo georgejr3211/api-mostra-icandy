@@ -26,6 +26,9 @@ async function getAllResources(offset, limit, search) {
       nome: {
         [_sequelize.Op.like]: `%${search}%`
       },
+      qtd_estoque: {
+        [_sequelize.Op.gt]: 0
+      },
       ativo: 1
     },
     order: [['id', 'DESC']]

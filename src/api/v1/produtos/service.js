@@ -10,6 +10,9 @@ export async function getAllResources(offset, limit, search) {
       nome: {
         [Op.like]: `%${search}%`,
       },
+      qtd_estoque: {
+        [Op.gt]: 0,
+      },
       ativo: 1,
     },
     order: [['id', 'DESC']],
