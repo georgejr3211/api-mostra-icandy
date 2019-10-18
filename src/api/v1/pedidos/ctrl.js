@@ -49,8 +49,8 @@ router.get('/user/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body);
-    console.log(req.body.longitude);
+    // console.log(req.body);
+    // console.log(req.body.longitude);
     req.body.troco = req.body.troco ? req.body.troco.replace(',', '.') : 0;
     const payload = {
       formas_pagamento_id: req.body.formas_pagamento_id,
@@ -60,9 +60,15 @@ router.post('/', async (req, res, next) => {
       troco: req.body.troco,
     };
 
+    const produtosForaEstoque = await resourceService.verificaEstoque(
+      req.body.itens.map(item => item.id),
+    );
+    if (produtosForaEstoque.length) {
+      return res.status(400).json(produtosForaEstoque);
+    }
+
     let resource = await resourceService.createResource(payload);
     resource = await resourceService.getResource(resource.id);
-
     req.body.itens.map(async (item) => {
       const payloadPedidoProduto = {
         pedidos_id: resource.id,
@@ -72,12 +78,10 @@ router.post('/', async (req, res, next) => {
 
       const produto = await produtoService.getResource(item.id);
       const qtdEstoque = produto.get('qtd_estoque') - Number(item.qtd);
-      if (qtdEstoque <= 0) {
-        throw new Error(
-          `O produto ${produto.get('nome')} não está mais disponível`,
-        );
-      }
-      await produtoService.updateResource(item.id, { qtd_estoque: qtdEstoque });
+
+      await produtoService.updateResource(item.id, {
+        qtd_estoque: qtdEstoque,
+      });
 
       await pedidoProdutoService.createResource(payloadPedidoProduto);
     });

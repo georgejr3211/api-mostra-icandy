@@ -23,6 +23,20 @@ export async function getResource(id) {
   return resource;
 }
 
+export async function getResourceProdutosByIdForaEstoque(ids) {
+  const resource = await Resource.findAll({
+    where: [
+      {
+        id: {
+          [Op.in]: ids,
+        },
+      },
+    ],
+  });
+
+  return resource;
+}
+
 export function createResource(resource) {
   return Resource.create(resource);
 }

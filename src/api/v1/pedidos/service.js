@@ -1,6 +1,7 @@
 import { Op, Sequelize } from 'sequelize';
 import Resource from './model';
 import StatusPedido from '../statusPedidos/model';
+import * as produtoService from '../produtos/service';
 
 export async function getAllResources(offset, limit, s) {
   let resources = await Resource.findAndCountAll({
@@ -72,4 +73,17 @@ export function updateResource(id, resource) {
 
 export function deleteResource(id) {
   return Resource.findByPk(id).then(res => res.destroy());
+}
+
+export async function verificaEstoque(idProdutos) {
+  try {
+    let produtosForaEstoque = await produtoService.getResourceProdutosByIdForaEstoque(
+      idProdutos,
+    );
+    produtosForaEstoque = produtosForaEstoque.map(produto => produto.get({ plain: true }));
+
+    return produtosForaEstoque;
+  } catch (error) {
+    throw new Error(error);
+  }
 }
