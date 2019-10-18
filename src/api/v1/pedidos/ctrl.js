@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as resourceService from './service';
 import * as pedidoProdutoService from '../pedidosProdutos/service';
+import * as produtoService from '../produtos/service';
 import * as localizacoesPedidosService from '../localizacoesPedidos/service';
 
 const router = Router();
@@ -68,6 +69,10 @@ router.post('/', async (req, res, next) => {
         produtos_id: item.id,
         quantidade: item.qtd,
       };
+
+      const produto = await produtoService.getResource(item.id);
+      const qtdEstoque = produto.get('qtd_estoque') - Number(item.qtd);
+      await produtoService.updateResource(item.id, { qtd_estoque: qtdEstoque });
 
       await pedidoProdutoService.createResource(payloadPedidoProduto);
     });

@@ -11,6 +11,8 @@ var resourceService = _interopRequireWildcard(require("./service"));
 
 var pedidoProdutoService = _interopRequireWildcard(require("../pedidosProdutos/service"));
 
+var produtoService = _interopRequireWildcard(require("../produtos/service"));
+
 var localizacoesPedidosService = _interopRequireWildcard(require("../localizacoesPedidos/service"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -77,6 +79,11 @@ router.post('/', async (req, res, next) => {
         produtos_id: item.id,
         quantidade: item.qtd
       };
+      const produto = await produtoService.getResource(item.id);
+      const qtdEstoque = produto.get('qtd_estoque') - Number(item.qtd);
+      await produtoService.updateResource(item.id, {
+        qtd_estoque: qtdEstoque
+      });
       await pedidoProdutoService.createResource(payloadPedidoProduto);
     });
     await localizacoesPedidosService.createResource({
