@@ -81,6 +81,11 @@ router.post('/', async (req, res, next) => {
       };
       const produto = await produtoService.getResource(item.id);
       const qtdEstoque = produto.get('qtd_estoque') - Number(item.qtd);
+
+      if (qtdEstoque <= 0) {
+        throw new Error(`O produto ${produto.get('nome')} não está mais disponível`);
+      }
+
       await produtoService.updateResource(item.id, {
         qtd_estoque: qtdEstoque
       });
