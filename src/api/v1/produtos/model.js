@@ -31,6 +31,10 @@ Produto.init(
       },
       allowNull: false,
     },
+    qtd_estoque: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
     nome: {
       type: Sequelize.STRING(100),
       allowNull: false,
