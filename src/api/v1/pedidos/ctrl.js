@@ -60,11 +60,21 @@ router.post('/', async (req, res, next) => {
       troco: req.body.troco,
     };
 
-    const produtosForaEstoque = await resourceService.verificaEstoque(
+    let produtosForaEstoque = await resourceService.verificaEstoque(
       req.body.itens.map(item => item.id),
     );
     if (produtosForaEstoque.length) {
-      return res.status(400).json(produtosForaEstoque);
+      produtosForaEstoque = produtosForaEstoque.filter((prod) => {
+        const item = req.body.itens.find(pItem => pItem.id === prod.id);
+        const qtdEstoque = prod.qtd_estoque - Number(item.qtd);
+        if (qtdEstoque < 0) {
+          return prod;
+        }
+      });
+
+      if (produtosForaEstoque.length !== 0) {
+        return res.status(400).json(produtosForaEstoque);
+      }
     }
 
     let resource = await resourceService.createResource(payload);
