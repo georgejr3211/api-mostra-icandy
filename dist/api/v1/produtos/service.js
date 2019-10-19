@@ -5,6 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getAllResources = getAllResources;
 exports.getResource = getResource;
+exports.getResourceProdutosByIdForaEstoque = getResourceProdutosByIdForaEstoque;
 exports.createResource = createResource;
 exports.updateResource = updateResource;
 exports.deleteResource = deleteResource;
@@ -26,6 +27,9 @@ async function getAllResources(offset, limit, search) {
       nome: {
         [_sequelize.Op.like]: `%${search}%`
       },
+      qtd_estoque: {
+        [_sequelize.Op.gt]: 0
+      },
       ativo: 1
     },
     order: [['id', 'DESC']]
@@ -35,6 +39,17 @@ async function getAllResources(offset, limit, search) {
 
 async function getResource(id) {
   const resource = await _model.default.findByPk(id);
+  return resource;
+}
+
+async function getResourceProdutosByIdForaEstoque(ids) {
+  const resource = await _model.default.findAll({
+    where: [{
+      id: {
+        [_sequelize.Op.in]: ids
+      }
+    }]
+  });
   return resource;
 }
 

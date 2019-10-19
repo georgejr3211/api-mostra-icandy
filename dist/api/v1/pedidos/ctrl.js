@@ -61,8 +61,8 @@ router.get('/user/:id', async (req, res, next) => {
 });
 router.post('/', async (req, res, next) => {
   try {
-    console.log(req.body);
-    console.log(req.body.longitude);
+    // console.log(req.body);
+    // console.log(req.body.longitude);
     req.body.troco = req.body.troco ? req.body.troco.replace(',', '.') : 0;
     const payload = {
       formas_pagamento_id: req.body.formas_pagamento_id,
@@ -70,7 +70,26 @@ router.post('/', async (req, res, next) => {
       status_pedido_id: 1,
       observacao: req.body.observacao,
       troco: req.body.troco
-    };
+    }; // busca os produtos que o usuário pediu
+
+    let produtosForaEstoque = await resourceService.verificaEstoque(req.body.itens.map(item => item.id));
+
+    if (produtosForaEstoque.length) {
+      // verifica se os produtos estao fora de estoque
+      produtosForaEstoque = produtosForaEstoque.filter(prod => {
+        const item = req.body.itens.find(pItem => pItem.id === prod.id);
+        const qtdEstoque = prod.qtd_estoque - Number(item.qtd);
+
+        if (qtdEstoque < 0) {
+          return prod;
+        }
+      });
+
+      if (produtosForaEstoque.length !== 0) {
+        return res.status(400).json(produtosForaEstoque);
+      }
+    }
+
     let resource = await resourceService.createResource(payload);
     resource = await resourceService.getResource(resource.id);
     req.body.itens.map(async item => {
@@ -81,11 +100,6 @@ router.post('/', async (req, res, next) => {
       };
       const produto = await produtoService.getResource(item.id);
       const qtdEstoque = produto.get('qtd_estoque') - Number(item.qtd);
-
-      if (qtdEstoque <= 0) {
-        throw new Error(`O produto ${produto.get('nome')} não está mais disponível`);
-      }
-
       await produtoService.updateResource(item.id, {
         qtd_estoque: qtdEstoque
       });

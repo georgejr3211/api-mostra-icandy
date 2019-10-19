@@ -38,6 +38,7 @@ router.get('/', async (req, res, next) => {
       s = ''
     } = req.query;
     const resources = await resourceService.getAllResources(offset, limit, s);
+    console.log('resources', resources);
     return res.json({
       value: resources
     });

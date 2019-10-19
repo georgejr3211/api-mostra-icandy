@@ -60,10 +60,13 @@ router.post('/', async (req, res, next) => {
       troco: req.body.troco,
     };
 
+    // busca os produtos que o usuário pediu
     let produtosForaEstoque = await resourceService.verificaEstoque(
       req.body.itens.map(item => item.id),
     );
+
     if (produtosForaEstoque.length) {
+      // verifica se os produtos estao fora de estoque
       produtosForaEstoque = produtosForaEstoque.filter((prod) => {
         const item = req.body.itens.find(pItem => pItem.id === prod.id);
         const qtdEstoque = prod.qtd_estoque - Number(item.qtd);
