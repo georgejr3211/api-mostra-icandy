@@ -19,9 +19,8 @@ export async function getAllResources(offset, limit, s) {
       ativo: 1,
       '$usuario.ativo$': 1,
     },
-    order: [['id', 'DESC']],
+    order: [['id', 'ASC']],
     offset,
-    limit,
   });
 
   const status = await Resource.findAll({
