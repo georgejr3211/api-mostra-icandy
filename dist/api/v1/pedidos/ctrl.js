@@ -110,6 +110,7 @@ router.post('/', async (req, res, next) => {
     //   latitude: req.body.latitude,
     // });
 
+    console.log('req', req.body);
     await localizacoesPedidosService.createResource({
       pedido_id: resource.id,
       metodo_entrega: req.body.metodo_entrega,
