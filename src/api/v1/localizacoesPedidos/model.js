@@ -26,6 +26,9 @@ LocalizacaoPedido.init(
     latitude: {
       type: Sequelize.INTEGER,
     },
+    metodo_entrega: {
+      type: Sequelize.INTEGER,
+    },
     ativo: {
       type: Sequelize.INTEGER,
       defaultValue: 1,

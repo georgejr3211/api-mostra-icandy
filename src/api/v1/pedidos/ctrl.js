@@ -99,8 +99,15 @@ router.post('/', async (req, res, next) => {
       await pedidoProdutoService.createResource(payloadPedidoProduto);
     });
 
+    // await localizacoesPedidosService.createResource({
+    //   pedido_id: resource.id,
+    //   longitude: req.body.longitude,
+    //   latitude: req.body.latitude,
+    // });
+
     await localizacoesPedidosService.createResource({
       pedido_id: resource.id,
+      metodo_entrega: req.body.metodo_entrega,
       longitude: req.body.longitude,
       latitude: req.body.latitude,
     });

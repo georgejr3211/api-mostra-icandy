@@ -37,6 +37,9 @@ LocalizacaoPedido.init({
   latitude: {
     type: _sequelize.default.INTEGER
   },
+  metodo_entrega: {
+    type: _sequelize.default.INTEGER
+  },
   ativo: {
     type: _sequelize.default.INTEGER,
     defaultValue: 1
