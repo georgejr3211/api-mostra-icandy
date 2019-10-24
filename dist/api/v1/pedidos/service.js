@@ -61,7 +61,7 @@ async function getAllResources(offset, limit, s) {
       ativo: 1,
       '$usuario.ativo$': 1
     },
-    order: [['id', 'ASC']],
+    order: [['id', 'DESC']],
     offset
   });
   const status = await _model.default.findAll({
